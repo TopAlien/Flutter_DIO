@@ -18,7 +18,7 @@ CustomScrollView 只能组合 Sliver，如果有孩子也是一个完整的可�
 <string>YES</string>
 `
 
-# 接口使用 https://www.wanandroid.com/blog/show/2 模拟
-- Dio请求封装
-- Getx路由配置
-- webView跳转
+### 接口使用 https://www.wanandroid.com/blog/show/2 模拟
+[x] Dio请求封装
+[x] Getx路由配置
+[x] webView跳转
