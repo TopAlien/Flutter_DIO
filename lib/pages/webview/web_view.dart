@@ -17,7 +17,9 @@ class _MyWebViewState extends State<MyWebView> {
   var controller = WebViewController();
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
+
     controller
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(const Color(0x00000000))
@@ -25,9 +27,11 @@ class _MyWebViewState extends State<MyWebView> {
         NavigationDelegate(
           onProgress: (int progress) {
             if (progress == 100) {
-              setState(() {
-                isLoading = false;
-              });
+              if (mounted) {
+                setState(() {
+                  isLoading = false;
+                });
+              }
             }
           },
           onPageStarted: (String url) {},
@@ -42,7 +46,10 @@ class _MyWebViewState extends State<MyWebView> {
         ),
       )
       ..loadRequest(Uri.parse(webUrl));
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,

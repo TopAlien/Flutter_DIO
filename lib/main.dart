@@ -1,6 +1,4 @@
 import 'package:dio_wanandroid/config/routeConfig.dart';
-import 'package:dio_wanandroid/pages/home/Home.dart';
-import 'package:dio_wanandroid/pages/webview/web_view.dart';
 import 'package:flutter/material.dart';
 import 'package:dio_wanandroid/utils/color.dart';
 import 'package:flutter/services.dart';
@@ -31,9 +29,51 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         primaryColor: ColorUtil.PRIMARY_THEME,
+        brightness: Brightness.light,
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
       ),
       getPages: RouteConfig.routes,
-      home: const HomePage(),
+      home: BottomNavigationWidget(),
+    );
+  }
+}
+
+class BottomNavigationWidget extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => BottomNavigationWidgetState();
+}
+
+class BottomNavigationWidgetState extends State<BottomNavigationWidget> {
+  int _currentIndex = 0;
+  late PageController _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(initialPage: _currentIndex);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: PageView(
+        physics: const NeverScrollableScrollPhysics(), // 禁用左右滑动
+        controller: _pageController,
+        children: RouteConfig.tabPages,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: RouteConfig.tabItems,
+        currentIndex: _currentIndex,
+        onTap: (int index) {
+          setState(() {
+            _currentIndex = index;
+            _pageController.jumpToPage(_currentIndex);
+          });
+        },
+        fixedColor: const Color.fromRGBO(234, 214, 77, 1.0),
+        type: BottomNavigationBarType.fixed,
+      ),
     );
   }
 }

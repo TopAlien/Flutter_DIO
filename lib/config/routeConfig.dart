@@ -1,5 +1,8 @@
-import 'package:dio_wanandroid/pages/webview/web_view.dart';
+import 'package:dio_wanandroid/pages/profile/Profile.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:dio_wanandroid/pages/home/Home.dart';
+import 'package:dio_wanandroid/pages/webview/web_view.dart';
 
 abstract class RouteConfig {
   /// webView
@@ -10,7 +13,22 @@ abstract class RouteConfig {
   /// 404页面
   // static final unknownPage = GetPage(name: '/notFound', page: () => const UnknownPage());
 
-  // static List<Widget> tabPages = [const HomePage(), const ServicePage(), const OrderPage(), const ProfilePage()];
+  static List<Widget> tabPages = [const HomePage(), const Profile()];
+
+  static List<BottomNavigationBarItem> tabItems = [
+    const BottomNavigationBarItem(
+      icon: Icon(
+        Icons.home,
+      ),
+      label: "首页",
+    ),
+    const BottomNavigationBarItem(
+      icon: Icon(
+        Icons.accessibility,
+      ),
+      label: "我的",
+    ),
+  ];
 
   /// 路由
   static final routes = [
